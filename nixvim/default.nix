@@ -136,6 +136,9 @@
       hi("Special", { fg = "Orange" })
       hi("Delimiter", { fg = "Orange" })
 
+      hi("MiniIndentScopeSymbol", { fg = "#40ffff", bold = true }) -- Matches your Function/Identifier light blue
+      hi("IblScope", { fg = "#40ffff", bold = true })              -- If using indent-blankline alternative
+
       -- Explicitly set your global color registration flag[cite: 5]
       vim.g.colors_name = "skywizard"
     '';
@@ -191,14 +194,41 @@
     nvim-autopairs.enable = true; # FIXED: Changed from 'autopairs' to 'nvim-autopairs'
     comment.enable = true;        # Quick comment toggling via 'gcc' and 'gc'
 
-    # Code Scope Visualizations
+    # The dynamic scope-tracking vertical lines
+    mini = {
+      enable = true;
+      modules = {
+        indentscope = {
+          symbol = "│";
+          options = {
+            try_as_border = true;
+          };
+        };
+      };
+    };
+    #
+    # Optional: If you want static background lines *plus* the active highlight tracking
     indent-blankline = {
+      enable = true;
+      settings = {
+        scope = {
+          #enabled = true;
+          enabled = false; # Turn off scope tracking here so it doesn't fight mini.indentscope. Fixes the double-highlighting
+
+          show_start = true;
+          show_end = false;
+        };
+      };
+    };
+    #
+    # Code Scope Visualizations
+    /*indent-blankline = {
       enable = true;
       settings = {
         indent.char = "│";
         scope.enabled = true;
       };
-    };
+    };*/
 
     # Syntax Parser Compiler Configuration
     treesitter = {
