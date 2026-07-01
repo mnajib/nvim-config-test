@@ -58,8 +58,11 @@
 
   # Your Declarative SkyWizard Custom Theme Definitions
   # This executes automatically if you don't override it via Telescope!
-  colorscheme = "tokyonight"; #default"; #"skywizard";
+  #colorscheme = "default";
+  colorscheme = "tokyonight"; # i like this
+  #colorscheme = "skywizard"; # my custom colorscheme
 
+  /*
   highlight = {
   #highlightOverride = {
     # UI Element Identifiers from skywizard.lua
@@ -87,6 +90,55 @@
     PreProc = { fg = "#ff80ff"; };
     Special = { fg = "Orange"; };
     Delimiter = { fg = "Orange"; };
+  };
+  */
+
+  # Injecting 'skywizard' Into the Runtime Path
+  extraFiles = {
+    "colors/skywizard.lua".text = ''
+      -- 1. Initialize and clear previous states
+      vim.cmd("hi clear")
+      if vim.fn.exists("syntax_on") == 1 then
+        vim.cmd("syntax reset")
+      end
+
+      -- 2. Load Gruvbox base highlights into the background
+      vim.cmd("colorscheme gruvbox")
+
+      -- 3. Overwrite with your custom SkyWizard definitions[cite: 5]
+      local function hi(group, opts)
+        vim.api.nvim_set_hl(0, group, opts)
+      end
+
+      -- UI Elements[cite: 5]
+      hi("Normal", { fg = "#ffffff", bg = "#000000" })
+      hi("Visual", { bg = "#285577" })
+      hi("CursorLine", { bg = "#1a1a1a" })
+      hi("LineNr", { fg = "#696969", bg = "#333333" })
+      hi("CursorLineNr", { fg = "#ffcc66", bg = "#1a1a1a", bold = true })
+      hi("Search", { bg = "#3a3a3a", fg = "#ffffff" })
+      hi("IncSearch", { reverse = true })
+
+      -- Syntax Token Overrides[cite: 5]
+      hi("Comment", { fg = "#767676", italic = true })
+      hi("String", { fg = "#ffa0a0" })
+      hi("Constant", { fg = "#ffa0a0" })
+      hi("Character", { fg = "#ffa0a0" })
+      hi("Number", { fg = "#ffa0a0" })
+      hi("Boolean", { fg = "#ffa0a0" })
+      hi("Float", { fg = "#ffa0a0" })
+      hi("Function", { fg = "#40ffff" })
+      hi("Identifier", { fg = "#40ffff" })
+      hi("Statement", { fg = "#ffff60", bold = true })
+      hi("Keyword", { fg = "#ffff60", bold = true })
+      hi("Type", { fg = "#60ff60", bold = true })
+      hi("PreProc", { fg = "#ff80ff" })
+      hi("Special", { fg = "Orange" })
+      hi("Delimiter", { fg = "Orange" })
+
+      -- Explicitly set your global color registration flag[cite: 5]
+      vim.g.colors_name = "skywizard"
+    '';
   };
 
   # Core LazyVim Feature Replications
