@@ -121,7 +121,7 @@
       hi("CursorLineNr", { fg = "#ffcc66", bg = "#1a1a1a", bold = true })
       hi("Search", { bg = "#3a3a3a", fg = "#ffffff" })
       hi("IncSearch", { reverse = true })
-      Hi("ColorColumn", { bg = "#111111" })
+      hi("ColorColumn", { bg = "#111111" })
 
       -- Syntax Token Overrides[cite: 5]
       hi("Comment", { fg = "#767676", italic = true })
