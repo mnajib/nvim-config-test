@@ -14,29 +14,84 @@
     autoindent = true;
     wrap = false;
     swapfile = false;
-    
+
     # LazyVim defaults
     signcolumn = "yes";           # Always show the sign column for git/lsp indicators
     clipboard = "unnamedplus";    # Sync with system clipboard natively
     timeoutlen = 300;             # Faster which-key popup display delay
+
+    # Custom invisible character symbols
+    list = true;
+    listchars = "trail:█,tab:>-,extends:»,precedes:«,nbsp:•";
   };
 
   # 2. Keymaps and Leader Initialization
   globals.mapleader = " "; # This must be set before plugins load for which-key to pick it up!
 
   keymaps = [
-    # Your preserved functional macros
-    { mode = "n"; key = "<F2>"; action = ":w<CR>"; options.desc = "Save File"; }
+    # My Legacy Function Keys / functional macros
+    { mode = "i"; key = "<F1>"; action = "<Esc>:q<CR>"; options.desc = "Quit"; }
+    { mode = "n"; key = "<F1>"; action = ":q<CR>"; options.desc = "Quit"; }
     { mode = "i"; key = "<F2>"; action = "<Esc>:w<CR>"; options.desc = "Save File"; }
+    { mode = "n"; key = "<F2>"; action = ":w<CR>"; options.desc = "Save File"; }
+    { mode = "i"; key = "<F3>"; action = "<Esc>:wq<CR>"; options.desc = "Save and Quit"; }
+    { mode = "n"; key = "<F3>"; action = ":wq<CR>"; options.desc = "Save and Quit"; }
 
-    # LazyVim navigation shortcuts
+    # LazyVim dynamic navigation shortcuts
     { mode = "n"; key = "<leader>e"; action = "<cmd>Neotree toggle<cr>"; options.desc = "Toggle Explorer (Neo-tree)"; }
     { mode = "n"; key = "<S-h>"; action = "<cmd>BufferLineCyclePrev<cr>"; options.desc = "Prev Buffer Tab"; }
     { mode = "n"; key = "<S-l>"; action = "<cmd>BufferLineCycleNext<cr>"; options.desc = "Next Buffer Tab"; }
+
+    # THE THEME TOGGLER: Press Spacebar + u + c to view all installed colorschemes live
+    { mode = "n"; key = "<leader>uc"; action = "<cmd>Telescope colorscheme<cr>"; options.desc = "Select Colorscheme Palette"; }
   ];
 
-  # 3. Core LazyVim Feature Replications
+  # Dynamic Themes Available to Choose From
+  colorschemes = {
+    # Replicates the Tokyonight style visible in your screenshot
+    tokyonight = {
+      enable = true;
+      settings.style = "moon"; # Try 'storm', 'night', or 'day'
+    };
+    gruvbox.enable = true;
+  };
+
+  # Your Declarative SkyWizard Custom Theme Definitions
+  # This executes automatically if you don't override it via Telescope!
+  colorscheme = "tokyonight"; #default"; #"skywizard";
+
+  highlight = {
+  #highlightOverride = {
+    # UI Element Identifiers from skywizard.lua
+    Normal = { fg = "#ffffff"; bg = "#000000"; };
+    Visual = { bg = "#285577"; };
+    CursorLine = { bg = "#1a1a1a"; };
+    LineNr = { fg = "#696969"; bg = "#333333"; };
+    CursorLineNr = { fg = "#ffcc66"; bg = "#1a1a1a"; bold = true; };
+    Search = { bg = "#3a3a3a"; fg = "#ffffff"; };
+    IncSearch = { reverse = true; };
+
+    # Syntax Token Groups from skywizard.lua
+    Comment = { fg = "#767676"; italic = true; };
+    String = { fg = "#ffa0a0"; };
+    Constant = { fg = "#ffa0a0"; };
+    Character = { fg = "#ffa0a0"; };
+    Number = { fg = "#ffa0a0"; };
+    Boolean = { fg = "#ffa0a0"; };
+    Float = { fg = "#ffa0a0"; };
+    Function = { fg = "#40ffff"; };
+    Identifier = { fg = "#40ffff"; };
+    Statement = { fg = "#ffff60"; bold = true; };
+    Keyword = { fg = "#ffff60"; bold = true; };
+    Type = { fg = "#60ff60"; bold = true; };
+    PreProc = { fg = "#ff80ff"; };
+    Special = { fg = "Orange"; };
+    Delimiter = { fg = "Orange"; };
+  };
+
+  # Core LazyVim Feature Replications
   plugins = {
+
     # The Interactive Menu Spacebar Engine
     which-key = {
       enable = true;
@@ -60,7 +115,7 @@
     # LazyVim Aesthetic: Bottom Statusline Styling
     lualine = {
       enable = true;
-      settings.options.theme = "dracula";
+      #settings.options.theme = "dracula";
     };
 
     # LazyVim Component: Structural File Tree Sidebar
@@ -101,5 +156,7 @@
         ensure_installed = [ "nix" "lua" "haskell" ];
       };
     };
-  };
+
+  }; # End plugins = { ... };
+
 }
