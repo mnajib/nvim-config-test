@@ -1,5 +1,5 @@
 {
-  description = "Isolated Nixvim Sandbox Directory Setup";
+  description = "Najib's Declarative self-contained LazyVim-like Neovim package";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -14,14 +14,18 @@
       system = "x86_64-linux"; # Your standard NixOS architecture
       pkgs = import nixpkgs { inherit system; };
 
-      # Build the sandbox package using your separate default.nix file
-      nv-sandbox = nixvim.legacyPackages.${system}.makeNixvimWithModule {
+      # This bundles all packages, plugins, options, and themes together
+      my-neovim = nixvim.legacyPackages.${system}.makeNixvimWithModule {
         module = import ./nixvim/default.nix;
       };
     in
     {
+      # Export the finished application package directly
+      packages.${system}.default = my-neovim;
+
+      # Local testing sandbox terminal shell hook
       devShells.${system}.default = pkgs.mkShell {
-        buildInputs = [ nv-sandbox ];
+        buildInputs = [ my-neovim ];
 
         shellHook = ''
           # Isolates Neovim state/cache paths completely
