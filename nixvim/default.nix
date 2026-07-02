@@ -7,6 +7,7 @@
     background = "dark";
     number = true;
     relativenumber = true;
+    cursorline = true;    # CRITICAL: Enables tracking and highlighting of the active line number gutter
     tabstop = 2;
     softtabstop = 2;
     shiftwidth = 2;
