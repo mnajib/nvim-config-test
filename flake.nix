@@ -27,6 +27,7 @@
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = [ my-neovim ];
 
+        /*
         shellHook = ''
           # Isolates Neovim state/cache paths completely
           export NVIM_APPNAME="nvim-sandbox"
@@ -38,6 +39,28 @@
           echo "    ~/.local/share/nvim-sandbox                         "
           echo "========================================================"
         '';
+        */
+        shellHook = ''
+          # Isolates Neovim state/cache paths completely
+          export NVIM_APPNAME="nvim-sandbox"
+
+          echo "========================================================"
+          echo "  Welcome to your isolated Neovim Sandbox!              "
+          echo ""
+          echo "  All runtime cache/state maps to:                     "
+          echo "    ~/.local/share/nvim-sandbox                         "
+          echo ""
+          echo "  To test your latest changes"
+          echo "    Run nvim with 'nix run . --'"
+          echo "  OR"
+          echo "    nix build"
+          echo "    ./result/bin/nvim"
+          echo "  OR"
+          echo "    nix build"
+          echo "    nvim"
+          echo "========================================================"
+        '';
+
       };
     };
 }

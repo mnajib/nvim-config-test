@@ -181,7 +181,10 @@
     # LazyVim Component: Structural File Tree Sidebar
     neo-tree = {
       enable = true;
-      closeIfLastWindow = true;
+      #closeIfLastWindow = true;
+      settings = {
+        close_if_last_window = true;
+      };
     };
 
     # LazyVim Component: Fuzzy Finding Layout Panels
@@ -206,13 +209,20 @@
         indentscope = {
           symbol = "│";
           options = {
-            try_as_border = true;
+
+            #try_as_border = true;
+            #
+            # Disable extra boundry lines to only show the single active scope line
+            border = "none";
+            try_as_border = false;
+
           };
         };
       };
     };
     #
     # Optional: If you want static background lines *plus* the active highlight tracking
+    /*
     indent-blankline = {
       enable = true;
       settings = {
@@ -225,6 +235,7 @@
         };
       };
     };
+    */
     #
     # Code Scope Visualizations
     /*indent-blankline = {
