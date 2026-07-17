@@ -25,7 +25,8 @@
 
       # Local testing sandbox terminal shell hook
       devShells.${system}.default = pkgs.mkShell {
-        buildInputs = [ my-neovim ];
+        #buildInputs = [ my-neovim ];
+        buildInputs = [ ]; # Empty this out so the sandboxed package isn't added to your $PATH
 
         /*
         shellHook = ''
