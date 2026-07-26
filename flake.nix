@@ -1,3 +1,4 @@
+# flake.nix
 {
   description = "Najib's Declarative self-contained LazyVim-like Neovim package";
 
@@ -5,7 +6,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixvim = {
       url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -16,7 +17,15 @@
 
       # This bundles all packages, plugins, options, and themes together
       my-neovim = nixvim.legacyPackages.${system}.makeNixvimWithModule {
-        module = import ./nixvim/default.nix;
+        #module = import ./nixvim/default.nix;
+        module = {
+          imports = [
+            ./nixvim/default.nix
+          ];
+
+          # Explicitly defines the source to suppress the evaluation warning
+          nixpkgs.source = nixpkgs;
+        };
       };
     in
     {
