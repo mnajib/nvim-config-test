@@ -41,13 +41,34 @@
     { mode = "i"; key = "<F3>"; action = "<Esc>:wq<CR>"; options.desc = "Save and Quit"; }
     { mode = "n"; key = "<F3>"; action = ":wq<CR>"; options.desc = "Save and Quit"; }
 
-    # LazyVim dynamic navigation shortcuts
+    # Top-level LazyVim Shortcuts
     { mode = "n"; key = "<leader>e"; action = "<cmd>Neotree toggle<cr>"; options.desc = "Toggle Explorer (Neo-tree)"; }
+    { mode = "n"; key = "<leader><space>"; action = "<cmd>Telescope find_files<cr>"; options.desc = "Find Files (Root)"; }
+
+    # +file/find
+    { mode = "n"; key = "<leader>ff"; action = "<cmd>Telescope find_files<cr>"; options.desc = "Find Files"; }
+    { mode = "n"; key = "<leader>fr"; action = "<cmd>Telescope oldfiles<cr>"; options.desc = "Recent Files"; }
+    { mode = "n"; key = "<leader>fh"; action = "<cmd>Telescope oldfiles<cr>"; options.desc = "Recently Opened Files"; }
+    { mode = "n"; key = "<leader>fg"; action = "<cmd>Telescope live_grep<cr>"; options.desc = "Find Word"; }
+    { mode = "n"; key = "<leader>fm"; action = "<cmd>Telescope marks<cr>"; options.desc = "Jump to Bookmarks"; }
+    { mode = "n"; key = "<leader>fn"; action = "<cmd>enew<cr>"; options.desc = "New File"; }
+
+    # +buffer
     { mode = "n"; key = "<S-h>"; action = "<cmd>BufferLineCyclePrev<cr>"; options.desc = "Prev Buffer Tab"; }
     { mode = "n"; key = "<S-l>"; action = "<cmd>BufferLineCycleNext<cr>"; options.desc = "Next Buffer Tab"; }
+    { mode = "n"; key = "<leader>bb"; action = "<cmd>Telescope buffers<cr>"; options.desc = "Switch Buffers"; }
+    { mode = "n"; key = "<leader>bd"; action = "<cmd>bdelete<cr>"; options.desc = "Delete Buffer"; }
 
-    # THE THEME TOGGLER: Press Spacebar + u + c to view all installed colorschemes live
-    { mode = "n"; key = "<leader>uc"; action = "<cmd>Telescope colorscheme<cr>"; options.desc = "Select Colorscheme Palette"; }
+    # +search
+    { mode = "n"; key = "<leader>sg"; action = "<cmd>Telescope live_grep<cr>"; options.desc = "Grep Workspace Text"; }
+    { mode = "n"; key = "<leader>sw"; action = "<cmd>Telescope grep_string<cr>"; options.desc = "Search Word under Cursor"; }
+    { mode = "n"; key = "<leader>sb"; action = "<cmd>Telescope current_buffer_fuzzy_find<cr>"; options.desc = "Buffer Search"; }
+
+    # +ui/toggle
+    { mode = "n"; key = "<leader>uc"; action = "<cmd>Telescope colorscheme<cr>"; options.desc = "Select Colorscheme"; }
+
+    # +quit/session
+    { mode = "n"; key = "<leader>qq"; action = "<cmd>qa<cr>"; options.desc = "Quit All"; }
   ];
 
   # Dynamic Themes Available to Choose From
@@ -158,6 +179,20 @@
       settings = {
         preset = "classic";
         win.border = "single";
+
+        # Register group labels (LazyVim Style)
+        spec = [
+          { __unkeyed-1 = "<leader>b"; group = "+buffer"; }
+          { __unkeyed-1 = "<leader>f"; group = "+file/find"; }
+          { __unkeyed-1 = "<leader>s"; group = "+search"; }
+          { __unkeyed-1 = "<leader>u"; group = "+ui/toggle"; }
+          #{ __unkeyed-1 = "<leader>b"; group = "buffer"; icon = "󰈔"; }
+          #{ __unkeyed-1 = "<leader>f"; group = "file/find"; icon = "󰈞"; }
+          #{ __unkeyed-1 = "<leader>s"; group = "search"; icon = "󰍉"; }
+          #{ __unkeyed-1 = "<leader>u"; group = "ui/toggle"; icon = "󰔎"; }
+          { __unkeyed-1 = "<leader>q"; group = "quit/session"; icon = "󰗼"; }
+        ];
+
       };
     };
 

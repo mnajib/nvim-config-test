@@ -13,7 +13,9 @@
 
   outputs = { nixpkgs, nixvim, ... }:
     let
+
       system = "x86_64-linux"; # Your standard NixOS architecture
+
       pkgs = import nixpkgs { inherit system; };
 
       # This bundles all packages, plugins, options, and themes together
