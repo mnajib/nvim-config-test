@@ -6,7 +6,7 @@
     termguicolors = true;
     background = "dark";
     number = true;
-    relativenumber = true;
+    relativenumber = false; #true;
     cursorline = true;    # CRITICAL: Enables tracking and highlighting of the active line number gutter
     tabstop = 2;
     softtabstop = 2;
@@ -239,7 +239,7 @@
 
     # The dynamic scope-tracking vertical lines
     mini = {
-      enable = true;
+      enable = false; #true;
       modules = {
         indentscope = {
           symbol = "│";
