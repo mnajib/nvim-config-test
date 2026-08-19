@@ -47,6 +47,25 @@
 
     # +file/find
     { mode = "n"; key = "<leader>ff"; action = "<cmd>Telescope find_files<cr>"; options.desc = "Find Files"; }
+    #{ mode = "n"; key = "<leader>fi"; action = "1<C-g>"; options.desc = "Show Full File Info"; }
+    {
+      mode = "n";
+      key = "<leader>fi";
+      action.__raw = ''
+        function()
+          local path = vim.api.nvim_buf_get_name(0)
+          local ft = vim.bo.filetype
+          local line_count = vim.api.nvim_buf_line_count(0)
+
+          if path == "" then
+            path = "[No Name]"
+          end
+
+          print(string.format("Path: %s | Type: %s | Lines: %d", path, ft, line_count))
+        end
+      '';
+      options.desc = "Show detailed file info";
+    }
     { mode = "n"; key = "<leader>fr"; action = "<cmd>Telescope oldfiles<cr>"; options.desc = "Recent Files"; }
     { mode = "n"; key = "<leader>fh"; action = "<cmd>Telescope oldfiles<cr>"; options.desc = "Recently Opened Files"; }
     { mode = "n"; key = "<leader>fg"; action = "<cmd>Telescope live_grep<cr>"; options.desc = "Find Word"; }
@@ -117,6 +136,20 @@
     Delimiter = { fg = "Orange"; };
   };
   */
+
+  #extraConfigLua = ''
+  #  vim.keymap.set('n', '<leader>fi', function()
+  #    local path = vim.api.nvim_buf_get_name(0)
+  #    local ft = vim.bo.filetype
+  #    local line_count = vim.api.nvim_buf_line_count(0)
+  #
+  #    if path == "" then
+  #      path = "[No Name]"
+  #    end
+  #
+  #    print(string.format("Path: %s | Type: %s | Lines: %d", path, ft, line_count))
+  #  end, { desc = "Show detailed file info" })
+  #'';
 
   # Injecting 'skywizard' Into the Runtime Path
   extraFiles = {
